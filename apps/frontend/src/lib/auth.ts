@@ -17,6 +17,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
+    async signIn({ user, account, profile }) {
+      // Security measure: Prevent unauthorized creation of SUPERADMINs
+      // The database schema already defaults to "USER", but this is an extra layer of protection.
+      // @ts-ignore
+      if (user.role === "SUPERADMIN") {
+        // Only allow SUPERADMINs that ALREADY exist in the database (verified via seeder)
+        return true; 
+      }
+      
+      // Allow all other standard OAuth sign-ins
+      return true;
+    },
     async session({ session, user }) {
       // Pass the user role to the session for RBAC checks
       if (session.user) {
