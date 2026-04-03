@@ -59,14 +59,14 @@ export function Navbar() {
           isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
         )}
       >
-        <div className="flex flex-col space-y-4 p-4">
+        <div className="container mx-auto flex flex-col items-center space-y-4 p-6 text-center">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setIsOpen(false)}
               className={cn(
-                "text-base font-medium transition-colors hover:text-primary",
+                "w-full text-lg font-medium transition-colors hover:text-primary py-2",
                 pathname === item.href ? "text-primary" : "text-muted-foreground"
               )}
             >
