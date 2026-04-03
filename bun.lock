@@ -30,6 +30,7 @@
       "version": "0.1.0",
       "dependencies": {
         "@auth/drizzle-adapter": "^1.11.1",
+        "@lms/db": "workspace:*",
         "@tanstack/react-query": "^5.96.2",
         "@tanstack/react-query-devtools": "^5.96.2",
         "class-variance-authority": "^0.7.1",
