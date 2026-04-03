@@ -6,7 +6,8 @@
   "types": "src/index.ts",
   "scripts": {
     "db:generate": "drizzle-kit generate",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "db:seed": "bun run src/seed.ts"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.2",
