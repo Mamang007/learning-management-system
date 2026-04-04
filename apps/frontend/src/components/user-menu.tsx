@@ -1,7 +1,8 @@
 'use client';
 
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export function UserMenu() {
   const { data: session, status } = useSession();
@@ -43,8 +44,8 @@ export function UserMenu() {
   }
 
   return (
-    <Button size='sm' onClick={() => signIn('google')}>
-      Login
+    <Button size='sm' asChild>
+      <Link href="/login">Login</Link>
     </Button>
   );
 }
