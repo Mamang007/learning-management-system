@@ -16,6 +16,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       clientSecret: process.env.AUTH_GOOGLE_SECRET,
     }),
   ],
+  session: { strategy: "jwt" },
   callbacks: {
     async signIn({ user, account, profile }) {
       // Security measure: Prevent unauthorized creation of SUPERADMINs
@@ -29,13 +30,22 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       // Allow all other standard OAuth sign-ins
       return true;
     },
-    async session({ session, user }) {
+    async jwt({ token, user }) {
+      if (user) {
+        // @ts-ignore
+        token.id = user.id;
+        // @ts-ignore
+        token.role = user.role;
+      }
+      return token;
+    },
+    async session({ session, token }) {
       // Pass the user role to the session for RBAC checks
       if (session.user) {
-        // @ts-ignore - Auth.js types are complex for custom columns
-        session.user.id = user.id;
         // @ts-ignore
-        session.user.role = user.role;
+        session.user.id = token.id;
+        // @ts-ignore
+        session.user.role = token.role;
       }
       return session;
     },
