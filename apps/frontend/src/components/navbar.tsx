@@ -22,13 +22,15 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="text-xl font-bold tracking-tight">LMS Project</span>
-        </Link>
+        {/* Logo (Left) */}
+        <div className="flex flex-1 items-center">
+          <Link href="/" className="flex items-center space-x-2">
+            <span className="text-xl font-bold tracking-tight">LMS Project</span>
+          </Link>
+        </div>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex md:items-center md:space-x-6">
+        {/* Desktop Navigation (Center) */}
+        <div className="hidden flex-1 justify-center md:flex md:items-center md:space-x-6">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -41,19 +43,25 @@ export function Navbar() {
               {item.name}
             </Link>
           ))}
-          <UserMenu />
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex items-center space-x-4 md:hidden">
-          <UserMenu />
-          <button
-            className="flex items-center justify-center rounded-md p-2"
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+        {/* User / Mobile Menu (Right) */}
+        <div className="flex flex-1 items-center justify-end space-x-4">
+          <div className="hidden md:block">
+            <UserMenu />
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex items-center space-x-2 md:hidden">
+            <UserMenu />
+            <button
+              className="flex items-center justify-center rounded-md p-2"
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
       </nav>
 
