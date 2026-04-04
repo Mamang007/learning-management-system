@@ -16,6 +16,7 @@
       "name": "backend",
       "version": "1.0.50",
       "dependencies": {
+        "@lms/db": "workspace:*",
         "drizzle-orm": "^0.45.2",
         "elysia": "latest",
         "postgres": "^3.4.8",

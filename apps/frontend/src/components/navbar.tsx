@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { UserMenu } from '@/components/user-menu';
 
 const navItems = [
   { name: 'Home', href: '/' },
@@ -40,16 +41,20 @@ export function Navbar() {
               {item.name}
             </Link>
           ))}
+          <UserMenu />
         </div>
 
         {/* Mobile Menu Button */}
-        <button
-          className="flex items-center justify-center rounded-md p-2 md:hidden"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="flex items-center space-x-4 md:hidden">
+          <UserMenu />
+          <button
+            className="flex items-center justify-center rounded-md p-2"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Drawer Navigation */}
