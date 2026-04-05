@@ -33,7 +33,7 @@ async function handleProxy(req: NextRequest, path: string[]) {
   }
 
   try {
-    const response = await fetch(\\/\\\, {
+    const response = await fetch(`${backendUrl}/${fullPath}${query}`, {
       method: req.method,
       headers,
       body: req.method !== 'GET' ? await req.text() : undefined,

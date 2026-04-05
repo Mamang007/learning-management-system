@@ -9,6 +9,7 @@ import { UserMenu } from '@/components/user-menu';
 
 const navItems = [
   { name: 'Home', href: '/' },
+  { name: 'Catalogue', href: '/products' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];
