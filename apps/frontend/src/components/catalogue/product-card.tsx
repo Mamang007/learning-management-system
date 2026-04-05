@@ -2,8 +2,9 @@ import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { type Product } from '@lms/db';
 
-export function ProductCard({ product }: { product: any }) {
+export function ProductCard({ product }: { product: Product }) {
   return (
     <Card className='overflow-hidden flex flex-col h-full'>
       <div className='aspect-video relative overflow-hidden bg-muted'>

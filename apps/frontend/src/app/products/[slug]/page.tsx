@@ -3,11 +3,18 @@ import { WebinarDetail } from '@/components/catalogue/webinar-detail';
 import { CourseDetail } from '@/components/catalogue/course-detail';
 import { DownloadDetail } from '@/components/catalogue/download-detail';
 import { notFound } from 'next/navigation';
+import { type Product, type Webinar, type Course, type DigitalDownload } from '@lms/db';
+
+type ExtendedProduct = Product & {
+  webinar?: Webinar;
+  sections?: any[];
+  resources?: any[];
+};
 
 export default async function ProductDetailPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   
-  let product;
+  let product: ExtendedProduct;
   try {
     product = await apiFetch(`/catalogue/${slug}`);
   } catch (error) {

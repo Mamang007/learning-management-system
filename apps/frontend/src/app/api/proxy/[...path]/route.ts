@@ -19,7 +19,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { path: str
 
 async function handleProxy(req: NextRequest, path: string[]) {
   const session = await auth();
-  const backendUrl = process.env.BACKEND_API_URL || 'http://localhost:3001';
+  const backendUrl = process.env.HOST_API_URL || 'http://localhost:3001';
   const fullPath = path.join('/');
   const query = req.nextUrl.search;
 

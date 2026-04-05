@@ -1,8 +1,9 @@
 import { apiFetch } from '@/lib/api';
 import { ProductCard } from '@/components/catalogue/product-card';
+import { type Product } from '@lms/db';
 
 export default async function ProductsPage() {
-  let products = [];
+  let products: Product[] = [];
   try {
     products = await apiFetch('/catalogue');
   } catch (error) {
