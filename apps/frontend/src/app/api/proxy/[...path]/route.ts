@@ -1,25 +1,29 @@
 import { auth } from '@/lib/auth';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(req: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleProxy(req, params.path);
+export async function GET(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+  const resolvedParams = await params;
+  return handleProxy(req, resolvedParams.path);
 }
 
-export async function POST(req: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleProxy(req, params.path);
+export async function POST(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+  const resolvedParams = await params;
+  return handleProxy(req, resolvedParams.path);
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleProxy(req, params.path);
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+  const resolvedParams = await params;
+  return handleProxy(req, resolvedParams.path);
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleProxy(req, params.path);
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+  const resolvedParams = await params;
+  return handleProxy(req, resolvedParams.path);
 }
 
 async function handleProxy(req: NextRequest, path: string[]) {
   const session = await auth();
-  const backendUrl = process.env.BACKEND_API_URL || 'http://localhost:3001';
+  const backendUrl = process.env.HOST_API_URL || 'http://localhost:3001';
   const fullPath = path.join('/');
   const query = req.nextUrl.search;
 
@@ -33,7 +37,7 @@ async function handleProxy(req: NextRequest, path: string[]) {
   }
 
   try {
-    const response = await fetch(\\/\\\, {
+    const response = await fetch(`${backendUrl}/api/${fullPath}${query}`, {
       method: req.method,
       headers,
       body: req.method !== 'GET' ? await req.text() : undefined,
