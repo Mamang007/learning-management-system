@@ -15,7 +15,29 @@ const app = new Elysia()
         title: 'LMS API Documentation',
         version: '1.0.0',
         description: 'API for the Learning Management System'
-      }
+      },
+      components: {
+        securitySchemes: {
+          UserIdAuth: {
+            type: 'apiKey',
+            in: 'header',
+            name: 'x-user-id',
+            description: 'Your User ID from the database'
+          },
+          UserRoleAuth: {
+            type: 'apiKey',
+            in: 'header',
+            name: 'x-user-role',
+            description: 'Your Role (USER or SUPERADMIN)'
+          }
+        }
+      },
+      security: [
+        {
+          UserIdAuth: [],
+          UserRoleAuth: []
+        }
+      ]
     }
   }))
   .use(authMiddleware)
