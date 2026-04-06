@@ -6,13 +6,17 @@ export default auth((req) => {
   const isLoggedIn = !!req.auth;
 
   const isAuthPage = nextUrl.pathname.startsWith('/login') || nextUrl.pathname.startsWith('/register');
-
+  const isAccountPage = nextUrl.pathname.startsWith('/account');
 
   if (isAuthPage) {
     if (isLoggedIn) {
       return NextResponse.redirect(new URL('/', nextUrl));
     }
     return NextResponse.next();
+  }
+
+  if (isAccountPage && !isLoggedIn) {
+    return NextResponse.redirect(new URL('/', nextUrl));
   }
 
   return NextResponse.next();
