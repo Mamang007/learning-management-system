@@ -1,0 +1,1 @@
+export default function HistoryPage() { return (<div><h1 className='text-3xl font-bold mb-4'>History Transaction</h1><p className='text-muted-foreground'>Your transaction history will appear here.</p></div>); }

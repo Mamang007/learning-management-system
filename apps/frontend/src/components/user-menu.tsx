@@ -14,7 +14,7 @@ export function UserMenu() {
   if (session) {
     return (
       <div className='flex items-center gap-4'>
-        <div className='flex items-center gap-2'>
+        <Link href="/account" className='flex items-center gap-2 hover:opacity-80 transition-opacity'>
           {session.user?.image ? (
             <img
               src={session.user.image}
@@ -31,7 +31,7 @@ export function UserMenu() {
           <span className='hidden text-sm font-medium md:block'>
             {session.user?.name}
           </span>
-        </div>
+        </Link>
         <Button
           variant='outline'
           size='sm'

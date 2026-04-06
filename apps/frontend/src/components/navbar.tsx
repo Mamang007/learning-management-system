@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { UserMenu } from "@/components/user-menu";
+import { useSession } from "next-auth/react";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -15,10 +16,16 @@ const navItems = [
 ];
 
 export function Navbar() {
+  const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const displayNavItems = [
+    ...navItems,
+    ...(session ? [{ name: "Profil", href: "/account" }] : []),
+  ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
@@ -34,7 +41,7 @@ export function Navbar() {
 
         {/* Desktop Navigation (Center) */}
         <div className="hidden flex-1 justify-center md:flex md:items-center md:space-x-6">
-          {navItems.map((item) => (
+          {displayNavItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -82,7 +89,7 @@ export function Navbar() {
         )}
       >
         <div className="container mx-auto flex flex-col items-center space-y-4 p-6 text-center">
-          {navItems.map((item) => (
+          {displayNavItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}

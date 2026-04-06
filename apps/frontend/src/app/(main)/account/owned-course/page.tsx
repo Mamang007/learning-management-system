@@ -1,0 +1,1 @@
+export default function OwnedCoursePage() { return (<div><h1 className='text-3xl font-bold mb-4'>Owned Course</h1><p className='text-muted-foreground'>Your purchased courses will appear here.</p></div>); }
